@@ -59,91 +59,85 @@ const CampaignForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-white to-slate-200 py-10 px-4 sm:px-6 lg:px-8 flex justify-center items-start">
-      <div className="w-full max-w-2xl bg-white rounded-3xl shadow-2xl p-6 sm:p-10">
-        <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-8">
-          📢 Launch a New Campaign
-        </h2>
-
-        {/* Segment Selection */}
-        <div className="mb-6">
-          <label htmlFor="segment" className="block font-medium text-gray-700 mb-2">
-            🎯 Target Segment
-          </label>
-          <select
-            id="segment"
-            value={selectedSegmentId}
-            onChange={(e) => setSelectedSegmentId(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="">-- Select a Segment --</option>
-            {segments.map((segment) => (
-              <option key={segment.id} value={segment.id}>
-                {segment.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Message Box */}
-        <div className="mb-6">
-          <label htmlFor="message" className="block font-medium text-gray-700 mb-2">
-            💬 Campaign Message
-          </label>
-          <textarea
-            id="message"
-            rows={4}
-            placeholder="E.g. Hi Mohit, here's 10% off on your next order!"
-            className="w-full p-4 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-          />
-        </div>
-
-        {/* AI Suggestion Button */}
-        <button
-          type="button"
-          onClick={handleAISuggestions}
-          disabled={aiLoading}
-          className={`w-full py-3 text-white rounded-lg font-semibold transition ${
-            aiLoading
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-gray-700 hover:bg-gray-800"
-          }`}
-        >
-          {aiLoading ? "✨ Generating Suggestions..." : "🔮 Suggest with AI"}
-        </button>
-
-        {/* AI Suggestions */}
-        {aiSuggestions.length > 0 && (
-          <div className="bg-gray-100 mt-5 p-4 rounded-lg shadow-inner">
-            <p className="font-semibold mb-3 text-gray-700">💡 Suggestions (click to use):</p>
-            <ul className="space-y-2">
-              {aiSuggestions.map((suggestion, i) => (
-                <li
-                  key={i}
-                  onClick={() => setMessage(suggestion)}
-                  className="p-2 bg-white border border-gray-300 rounded-md cursor-pointer hover:bg-blue-100 transition"
-                >
-                  {suggestion}
-                </li>
-              ))}
-            </ul>
+    <div className="max-w-2xl mx-auto font-['Roboto']">
+      <div className="bg-white border border-gray-100 rounded-[2.5rem] shadow-xl shadow-gray-200/40 p-8 sm:p-12">
+        <div className="flex flex-col items-center mb-12">
+          <div className="p-3 bg-gray-50 rounded-2xl mb-4">
+            <span className="text-3xl">🚀</span>
           </div>
-        )}
+          <h2 className="text-2xl font-black text-gray-900 tracking-tight text-center">
+            Launch Campaign
+          </h2>
+          <p className="text-gray-400 text-sm mt-1">Deploy message to segment</p>
+        </div>
 
-        {/* Submit Button */}
-        <button
-          onClick={handleSubmit}
-          disabled={loading}
-          className={`mt-6 w-full py-3 rounded-lg font-semibold text-white ${
-            loading
-              ? "bg-blue-400 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700"
-          } transition-colors`}
-        >
-          {loading ? "📤 Sending..." : "🚀 Send Campaign"}
-        </button>
+        <div className="space-y-10">
+          <div>
+            <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-4 ml-1">Target Segment</label>
+            <select
+              className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500/10 focus:border-blue-500 transition-all text-gray-900 outline-none"
+              value={selectedSegmentId}
+              onChange={(e) => setSelectedSegmentId(e.target.value)}
+            >
+              <option value="">Select Audience</option>
+              {segments.map((segment) => (
+                <option key={segment.id} value={segment.id}>
+                  {segment.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <div className="flex justify-between items-center mb-4 ml-1">
+              <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest">Message Content</label>
+              <button
+                onClick={handleAISuggestions}
+                disabled={aiLoading}
+                className="text-[10px] font-black text-blue-500 hover:text-blue-600 uppercase tracking-widest flex items-center gap-1.5 transition-all"
+              >
+                <span>✨</span> {aiLoading ? "ANALYZING..." : "AI SUGGEST"}
+              </button>
+            </div>
+            <textarea
+              className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500/10 focus:border-blue-500 transition-all text-gray-900 placeholder:text-gray-400 outline-none resize-none"
+              rows={5}
+              placeholder="Hi [Name], check out our new collection!"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+          </div>
+
+          {aiSuggestions.length > 0 && (
+            <div className="space-y-3">
+              <label className="block text-[10px] font-bold text-gray-300 uppercase tracking-widest ml-1">AI Drafts</label>
+              <div className="grid grid-cols-1 gap-2">
+                {aiSuggestions.map((suggestion, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setMessage(suggestion)}
+                    className="text-left p-4 bg-blue-50/30 border border-blue-100/50 hover:bg-white hover:border-blue-300 rounded-2xl text-sm text-gray-600 transition-all active:scale-[0.99]"
+                  >
+                    {suggestion}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Submit Button */}
+          <button
+            onClick={handleSubmit}
+            disabled={loading}
+            className={`w-full py-5 rounded-2xl font-bold text-white transition-all active:scale-[0.98] shadow-lg ${
+              loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-gray-900 hover:bg-black shadow-gray-200"
+            }`}
+          >
+            {loading ? "DEPLOYING..." : "LAUNCH CAMPAIGN"}
+          </button>
+        </div>
       </div>
     </div>
   );

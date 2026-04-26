@@ -44,7 +44,7 @@ const LoginPage = () => {
       } else {
         alert("Please verify your email before logging in.");
       }
-    } catch (error) {
+    } catch {
       alert("Login failed during decoding");
     }
   };
@@ -90,20 +90,27 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col">
-      {/* Navbar with Xeno logo */}
-      <nav className="w-full flex items-center justify-center py-6 bg-gray-900">
-        <img src="/logo.png" alt="Xeno Logo" className="h-16 w-auto" />
-      </nav>
-      {/* Login form */}
-      <div className="flex flex-1 items-center justify-center">
-        <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md">
-          <p className="text-gray-300 mb-6 text-center">
-            {mode === "login" ? "Login to your account" : "Create a new account"}
-          </p>
-          <form onSubmit={handleManualSubmit} className="space-y-4 text-left">
+    <div className="min-h-screen w-full bg-[#fafafa] flex flex-col items-center justify-center p-6 font-['Roboto']">
+      <div className="w-full max-w-md">
+        <div className="flex flex-col items-center mb-10">
+          <div className="w-14 h-14 bg-white border border-gray-100 p-3 rounded-2xl shadow-sm mb-4">
+            <img src="/logo.png" alt="Xeno Logo" className="w-full h-full object-contain" />
+          </div>
+          <h1 className="text-2xl font-black tracking-tight text-gray-900">Xeno</h1>
+          <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mt-2">CRM & Analytics Hub</p>
+        </div>
+
+        <div className="bg-white border border-gray-100 p-10 sm:p-12 rounded-[2.5rem] shadow-xl shadow-gray-200/40">
+          <div className="text-center mb-10">
+            <h2 className="text-xl font-bold text-gray-900">
+              {mode === "login" ? "Welcome Back" : "Get Started"}
+            </h2>
+            <p className="text-gray-400 text-sm mt-1">Please enter your details</p>
+          </div>
+
+          <form onSubmit={handleManualSubmit} className="space-y-5">
             {mode !== "login" && (
-              <>
+              <div className="space-y-4">
                 <input
                   type="text"
                   name="name"
@@ -111,44 +118,46 @@ const LoginPage = () => {
                   onChange={handleChange}
                   placeholder="Full Name"
                   required
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 bg-gray-700 text-white"
+                  className="w-full px-5 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-gray-900 placeholder:text-gray-400 outline-none"
                 />
-                <input
-                  type="number"
-                  name="age"
-                  value={form.age}
-                  onChange={handleChange}
-                  placeholder="Age"
-                  required
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 bg-gray-700 text-white"
-                />
-                <input
-                  type="date"
-                  name="dob"
-                  value={form.dob}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 bg-gray-700 text-white"
-                />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <input
+                    type="number"
+                    name="age"
+                    value={form.age}
+                    onChange={handleChange}
+                    placeholder="Age"
+                    required
+                    className="w-full px-5 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-gray-900 placeholder:text-gray-400 outline-none"
+                  />
+                  <input
+                    type="date"
+                    name="dob"
+                    value={form.dob}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-5 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-gray-900 outline-none"
+                  />
+                </div>
                 <input
                   type="text"
                   name="address"
                   value={form.address}
                   onChange={handleChange}
-                  placeholder="Address"
+                  placeholder="Location"
                   required
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 bg-gray-700 text-white"
+                  className="w-full px-5 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-gray-900 placeholder:text-gray-400 outline-none"
                 />
-              </>
+              </div>
             )}
             <input
               type="email"
               name="email"
               value={form.email}
               onChange={handleChange}
-              placeholder="Email"
+              placeholder="Email Address"
               required
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 bg-gray-700 text-white"
+              className="w-full px-5 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-gray-900 placeholder:text-gray-400 outline-none"
             />
             <div className="relative">
               <input
@@ -158,13 +167,13 @@ const LoginPage = () => {
                 onChange={handleChange}
                 placeholder="Password"
                 required
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 bg-gray-700 text-white"
+                className="w-full pl-5 pr-14 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-gray-900 placeholder:text-gray-400 outline-none"
               />
               <span
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-2.5 text-sm text-blue-400 cursor-pointer select-none"
+                className="absolute right-4 top-4 text-[10px] font-bold text-gray-400 cursor-pointer select-none hover:text-blue-500 transition-colors"
               >
-                {showPassword ? "Hide" : "Show"}
+                {showPassword ? "HIDE" : "SHOW"}
               </span>
             </div>
             {mode !== "login" && (
@@ -176,40 +185,51 @@ const LoginPage = () => {
                   onChange={handleChange}
                   placeholder="Confirm Password"
                   required
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 bg-gray-700 text-white"
+                  className="w-full pl-5 pr-14 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-gray-900 placeholder:text-gray-400 outline-none"
                 />
                 <span
                   onClick={() => setShowConfirm(!showConfirm)}
-                  className="absolute right-3 top-2.5 text-sm text-blue-400 cursor-pointer select-none"
+                  className="absolute right-4 top-4 text-[10px] font-bold text-gray-400 cursor-pointer select-none hover:text-blue-500 transition-colors"
                 >
-                  {showConfirm ? "Hide" : "Show"}
+                  {showConfirm ? "HIDE" : "SHOW"}
                 </span>
               </div>
             )}
             <button
               type="submit"
-              className="w-full py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition"
+              className="w-full py-4 bg-gray-900 hover:bg-black text-white font-bold rounded-2xl shadow-lg shadow-gray-200 transition-all active:scale-[0.98]"
             >
-              {mode === "login" ? "Login" : "Register"}
+              {mode === "login" ? "Sign In" : "Create Account"}
             </button>
           </form>
-          <div className="relative my-6">
+
+          <div className="relative my-10">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300" />
+              <div className="w-full border-t border-gray-100" />
             </div>
-            <div className="relative text-sm text-gray-500 bg-gray-800 px-4 text-center">or</div>
+            <div className="relative text-[10px] font-bold text-gray-300 bg-white px-4 text-center uppercase tracking-widest">or</div>
           </div>
-          <GoogleLogin onSuccess={handleLoginSuccess} onError={handleLoginError} width="100%" theme="filled_blue" size="large" shape="rect" text="signin_with" />
-          <div className="text-center mt-6 text-gray-300">
-            {mode === "login" ? "New here?" : "Already have an account?"} {" "}
+
+          <div className="flex justify-center">
+            <GoogleLogin onSuccess={handleLoginSuccess} onError={handleLoginError} width="100%" theme="outline" size="large" shape="pill" text="continue_with" />
+          </div>
+
+          <div className="text-center mt-10 text-sm">
+            <span className="text-gray-400">
+              {mode === "login" ? "New here?" : "Joined us before?"}
+            </span>{" "}
             <span
               onClick={() => setMode(mode === "login" ? "register" : "login")}
-              className="text-blue-400 cursor-pointer hover:underline"
+              className="text-gray-900 font-bold cursor-pointer hover:underline underline-offset-4 decoration-gray-200"
             >
-              {mode === "login" ? "Create an account" : "Login"}
+              {mode === "login" ? "Create Account" : "Sign In"}
             </span>
           </div>
         </div>
+        
+        <p className="text-center mt-12 text-[10px] font-bold text-gray-300 uppercase tracking-widest">
+          &copy; {new Date().getFullYear()} Xeno Analytics
+        </p>
       </div>
     </div>
   );

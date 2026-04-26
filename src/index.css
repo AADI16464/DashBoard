@@ -1,5 +1,4 @@
 @import "tailwindcss";
-/* Optional custom styles */
 
 * {
   margin: 0;
@@ -8,10 +7,11 @@
 }
 
 body {
-  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9fafb;
-  color: #1f2937;
+  font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+  background-color: #ffffff;
+  color: #1a1a1a;
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
 }
 
 input,
@@ -22,36 +22,39 @@ button {
   outline: none;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5); /* blue-500 ring */
-  transition: box-shadow 0.2s;
+::selection {
+  background-color: #3b82f6;
+  color: #fff;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
+/* Minimalist Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(100, 116, 139, 0.3);
-  border-radius: 4px;
+  background: #e5e7eb;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d1d5db;
+}
+
+/* Subtle utility classes */
+.card-minimal {
+  background: #ffffff;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
 }
 
 .text-gradient {
-  background: linear-gradient(to right, #4f46e5, #3b82f6);
+  background: linear-gradient(to right, #2563eb, #3b82f6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #1f2937;
-    color: #f3f4f6;
-  }
 }
